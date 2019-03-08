@@ -1,1 +1,1 @@
-# prom-exporter-aggregator [![Docker Repository on Quay](https://quay.io/repository/wish/prom-exporter-aggregator/status "Docker Repository on Quay")](https://quay.io/repository/wish/prom-exporter-aggregator)
+# prom-exporter-aggregator [![Docker Repository on Quay](https://quay.io/repository/wish/prom-exporter-aggregator/status "Docker Repository on Quay")](https://quay.io/repository/wish/prom-exporter-aggregator) [![Build Status](https://travis-ci.org/wish/prom-exporter-aggregator.svg?branch=master)](https://travis-ci.org/wish/prom-exporter-aggregator)
