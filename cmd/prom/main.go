@@ -16,7 +16,7 @@ import (
 	"github.com/prometheus/common/expfmt"
 	"github.com/sirupsen/logrus"
 
-	"github.com/wish/prom-aggregator/pkg"
+	"github.com/wish/prom-exporter-aggregator/pkg"
 )
 
 const (

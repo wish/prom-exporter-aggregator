@@ -1,4 +1,4 @@
-module github.com/wish/prom-aggregator
+module github.com/wish/prom-exporter-aggregator
 
 go 1.12
 
