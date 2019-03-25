@@ -91,12 +91,14 @@ func fetch(ctx context.Context, url, name string, ch chan ftch, o Options) {
 
 	res, err := ctxhttp.Get(reqCtx, nil, url)
 	if err != nil {
+		logrus.Debugf("HTTP Get failed %v (%v): %v", name, url, err)
 		ch <- ftch{[]*dto.MetricFamily{}, name, err}
 		return
 	}
 	defer res.Body.Close()
 	mfs, err := parse(res.Body, o.MetricKey(), name)
 	if err != nil {
+		logrus.Debugf("parse failed %v (%v): %v", name, url, err)
 		ch <- ftch{[]*dto.MetricFamily{}, name, err}
 		return
 	}
