@@ -12,23 +12,6 @@ type MergeFamilies []*dto.MetricFamily
 func (a MergeFamilies) Len() int      { return len(a) }
 func (a MergeFamilies) Swap(i, j int) { a[i], a[j] = a[j], a[i] }
 func (a MergeFamilies) Less(i, j int) bool {
-	if *a[i].Name == "" && *a[j].Name == "" {
-		return false
-	}
-	if *a[i].Name == "" {
-		return false
-	}
-	if *a[j].Name == "" {
-		return true
-	}
-	if *a[i].Name == *a[j].Name {
-		for _, m := range a[j].Metric {
-			a[i].Metric = append(a[i].Metric, m)
-		}
-		*a[j].Name = ""
-		return false
-	}
-
 	return strings.Compare(*a[i].Name, *a[j].Name) == -1
 }
 

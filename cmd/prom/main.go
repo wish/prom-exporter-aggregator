@@ -98,14 +98,25 @@ func metricsHandler(rsp http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	sort.Sort(pkg.MergeFamilies(mfs))
-	out := []*dto.MetricFamily{}
-	for _, m := range mfs {
-		sort.Sort(pkg.Metrics(m.Metric))
-		if *m.Name != "" {
-			out = append(out, m)
+	mergeFamilies := make(map[string]*dto.MetricFamily)
+	for _, mf := range mfs {
+		_, ok := mergeFamilies[*mf.Name]
+		if !ok {
+			mergeFamilies[*mf.Name] = mf
+		} else {
+			for _, m := range mf.Metric {
+				mergeFamilies[*mf.Name].Metric = append(mergeFamilies[*mf.Name].Metric, m)
+			}
 		}
 	}
+
+	out := []*dto.MetricFamily{}
+	for _, m := range mergeFamilies {
+		sort.Sort(pkg.Metrics(m.Metric))
+		out = append(out, m)
+	}
+
+	sort.Sort(pkg.MergeFamilies(out))
 
 	contentType := expfmt.Negotiate(req.Header)
 	header := rsp.Header()
